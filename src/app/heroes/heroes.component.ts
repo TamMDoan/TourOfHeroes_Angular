@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Hero } from '../interfaces/hero';
 import { HEROES } from '../mock-heroes';
-import { HeroService } from '../services/hero.service';
+import { HeroService } from '../services/hero/hero.service';
+import { MessageService } from '../services/message/message.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class HeroesComponent {
   such as wiring parameters to properties.
   The constructor shouldn't do ANYTHING.
   */
-  constructor(private heroService: HeroService){
+  constructor(private heroService: HeroService, private messageService: MessageService){
     // this constructor is wiring heroService to a singleton instance of HeroService
   }
 
@@ -33,6 +34,7 @@ export class HeroesComponent {
   
   onSelect(hero: Hero) {
     this.selectedHero = hero;
+    this.messageService.add('HeroesComponent: Selected hero id=${hero.id}');
   }
 
   getHeroes(): void {
