@@ -28,7 +28,6 @@ export class HeroDetailComponent {
 
   ngOnInit(): void {
     this.getHero();
-    console.log("Please");
   }
 
   getHero(): void {
@@ -36,6 +35,13 @@ export class HeroDetailComponent {
     // paramMap is a dictionary of route parameter values from the URL
     const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.heroService.getHero(id).subscribe(hero => this.hero = hero);
+  }
+
+  goBack(): void {
+    // goes backward one step in the browser's history
+    // convenient if you have multiple ways to get to the same page
+    // it will go back the way that you came
+    this.location.back();
   }
 
 }
