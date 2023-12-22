@@ -14,12 +14,14 @@ import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HeroesComponent,
-        HeroDetailComponent
+        HeroDetailComponent,
+        MessagesComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
