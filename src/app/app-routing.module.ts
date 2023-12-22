@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'heroes', component: HeroesComponent},
   { path: 'dashboard', component: DashboardComponent},
   // : means that :id is placeholder for hero id
-  { path: '/detail/:id', component: HeroDetailComponent}
+  { path: 'detail/:id', component: HeroDetailComponent}
 ];
 
 @NgModule({
