@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Hero } from '../interfaces/hero';
-import { HEROES } from '../mock-heroes';
-import { HeroService } from '../services/hero/hero.service';
-import { MessageService } from '../services/message/message.service';
+import { Hero } from '../../interfaces/hero';
+import { HEROES } from '../../mock-heroes';
+import { HeroService } from '../../services/hero/hero.service';
+import { MessageService } from '../../services/message/message.service';
 
 
 @Component({
@@ -31,20 +31,27 @@ export class HeroesComponent {
   ngOnInit(): void {
     this.getHeroes();
   }
+
+  getHeroes(): void {
+    // Subscribe is an asynchronous request. Async requests are better
+    // especially when getting data from a server bc it takes into consideration
+    // possible hiccups and delays when making and receiving requests.
+    
+    this.heroService.getHeroes().subscribe(
+      heroes => this.heroes = heroes
+    );
+  }
   
+  /* 
+  CODE HERE NO LONGER USED
+
+  - - - - - - - - - - - - 
+
   onSelect(hero: Hero) {
     this.selectedHero = hero;
     this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
   }
 
-  getHeroes(): void {
-    /*
-    Subscribe is an asynchronous request. Async requests are better
-    especially when getting data from a server bc it takes into consideration
-    possible hiccups and delays when making and receiving requests.
-    */
-    this.heroService.getHeroes().subscribe(
-      heroes => this.heroes = heroes
-    );
-  }
+  */
+  
 }
