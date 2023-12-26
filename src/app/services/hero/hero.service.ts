@@ -3,19 +3,27 @@ import { Hero } from '../../interfaces/hero';
 import { HEROES } from '../../mock-heroes';
 import { Observable, of } from 'rxjs';
 import { MessageService } from '../message/message.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroService {
 
-  constructor(private messageService: MessageService) { }
+  private heroesUrl = 'api/heroes';  // URL to web api
+
+  constructor(private messageService: MessageService, private http: HttpClient) { }
+
+  /** Log a HeroService message with the MessageService */
+  private log(message: string) {
+    this.messageService.add(`HeroService: ${message}`);
+  }
 
   getHeroes(): Observable<Hero[]> {
     // HEROES is already a [], of makes it observable
-    const heroes = of(HEROES);
-    this.messageService.add('HeroService: fetched heroes');
-    return heroes;
+    // const heroes = of(HEROES);
+    this.log(`fetched heroes`);
+    return this.http.get<Hero[]>(this.heroesUrl)
   }
 
   getHero(id: number): Observable<Hero> {
@@ -23,7 +31,7 @@ export class HeroService {
     // that's the same as the paramater id. Keep in mind that 
     // you can do this!
     const hero = HEROES.find( h => h.id ===id)!;
-    this.messageService.add(`HeroService: fetched hero id=${id}`);
+    this.log(`fetched hero id=${id}`);
     return of(hero);
   }
 }
